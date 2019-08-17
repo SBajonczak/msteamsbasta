@@ -10,6 +10,7 @@
     "coverage": "jest --coverage"
   },
   "dependencies": {
+    "@microsoft/office-js-helpers": "^1.0.2",
     "@microsoft/teams-js": "1.4.2",
     "@types/debug": "0.0.31",
     "@types/enzyme": "^3.9.1",
@@ -104,8 +105,5 @@
     "coverageReporters": [
       "text"
     ]
-  },
-  "devDependencies": {
-    "@microsoft/office-js-helpers": "^1.0.2"
   }
 }
