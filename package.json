@@ -45,6 +45,7 @@
     "typescript": "^2.0.3",
     "typings": "^1.4.0",
     "webpack": "^1.13.2",
+    "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^1.16.2",
     "webpack-merge": "^0.15.0"
   }
