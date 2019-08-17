@@ -1,0 +1,11 @@
+{
+  "generator-teams": {
+    "promptValues": {
+      "developer": "Wir",
+      "unitTestsEnabled": true,
+      "useAzureAppInsights": true
+    },
+    "libraryName": "bastaTodo",
+    "generator-version": "2.11.1"
+  }
+}
