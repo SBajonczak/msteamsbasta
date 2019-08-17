@@ -166,6 +166,7 @@ export class OutlookTasks implements ITodoService {
         };
     }
 
+    // @ts-ignore
     async delete(todo: ITodo): Promise<boolean> {
         try {
             let res = await fetch(`${this._baseUrl}/me/tasks('${todo.id}')`,
