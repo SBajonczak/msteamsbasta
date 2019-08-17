@@ -17,35 +17,44 @@ log(`Initializing Microsoft Teams Express hosted App...`);
 require("dotenv").config();
 
 
+log(`Setup App Insights...`);
 // Set up app insights
 appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
 
 
+log(`Load all components...`);
 // The import of components has to be done AFTER the dotenv config
 import * as allComponents from "./TeamsAppsComponents";
 
+log(`Create Express server...`);
 // Create the Express webserver
 const express = Express();
 const port = process.env.port || process.env.PORT || 3007;
 
+log(`Create Request injector...`);
 // Inject the raw request body onto the request object
 express.use(Express.json({
     verify: (req, res, buf: Buffer, encoding: string): void => {
         (req as any).rawBody = buf.toString();
     }
 }));
+log(`Config encoded uri...`);
 express.use(Express.urlencoded({ extended: true }));
 
+log(`Apply views...`);
 // Express configuration
 express.set("views", path.join(__dirname, "/"));
 
+log(`Adding logging...`);
 // Add simple logging
 express.use(morgan("tiny"));
 
+log(`Apply static folders...`);
 // Add /scripts and /assets as static folders
 express.use("/scripts", Express.static(path.join(__dirname, "web/scripts")));
 express.use("/assets", Express.static(path.join(__dirname, "web/assets")));
 
+log(`Configuring ruter components...`);
 // routing for bots, connectors and incoming web hooks - based on the decorators
 // For more information see: https://www.npmjs.com/package/express-msteams-host
 express.use(MsTeamsApiRouter(allComponents));

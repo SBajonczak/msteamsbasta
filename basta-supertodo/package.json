@@ -104,5 +104,8 @@
     "coverageReporters": [
       "text"
     ]
+  },
+  "devDependencies": {
+    "@microsoft/office-js-helpers": "^1.0.2"
   }
 }

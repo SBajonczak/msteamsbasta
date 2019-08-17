@@ -11,6 +11,7 @@ import {
 } from "msteams-ui-components-react";
 import TeamsBaseComponent, { ITeamsBaseComponentProps, ITeamsBaseComponentState } from "msteams-react-base-component";
 import * as microsoftTeams from "@microsoft/teams-js";
+import {OutlookTasks} from "../../services";
 
 /**
  * State for the bastaSuperTodoTabTab React component
@@ -31,7 +32,10 @@ export interface IBastaSuperTodoTabProps extends ITeamsBaseComponentProps {
  */
 export class BastaSuperTodoTab extends TeamsBaseComponent<IBastaSuperTodoTabProps, IBastaSuperTodoTabState> {
 
+    tasks:OutlookTasks;
     public componentWillMount() {
+        this.tasks = new OutlookTasks();
+
         this.updateTheme(this.getQueryVariable("theme"));
         this.setState({
             fontSize: this.pageFontSize()
@@ -52,6 +56,9 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<IBastaSuperTodoTabProp
         }
     }
 
+    public ButtonClicked(){
+        this.tasks.login();
+    }
     /**
      * The render() method to create the UI of the tab
      */
@@ -79,7 +86,7 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<IBastaSuperTodoTabProp
                                 {this.state.entityId}
                             </div>
                             <div style={styles.section}>
-                                <PrimaryButton onClick={() => alert("It worked!")}>A sample button</PrimaryButton>
+                                <PrimaryButton onClick={this.ButtonClicked}>A sample button</PrimaryButton>
                             </div>
                         </PanelBody>
                         <PanelFooter>
