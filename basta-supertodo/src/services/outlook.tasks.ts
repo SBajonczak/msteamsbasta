@@ -62,13 +62,14 @@ export class OutlookTasks implements ITodoService {
          * accordingly.
          */
         this.authenticator = new Authenticator();
-        this.authenticator.endpoints.registerMicrosoftAuth(this.clientId, {
-            baseUrl: 'https://login.microsoftonline.com/organizations/oauth2/v2.0',
-            scope: 'https://outlook.office.com/tasks.readwrite'
-        });
+        this.authenticator.endpoints.registerAzureADAuth('bd9464a2-8b29-4165-a3c8-4d4dfd64b59a', '99c7da52-56fc-49ca-aa95-8f7fb09c995e');
 
-
-        this._token = this.authenticator.tokens.get('Microsoft');
+        // this.authenticator.endpoints.registerMicrosoftAuth(this.clientId, {
+        //     baseUrl: 'https://login.microsoftonline.com/organizations/oauth2/v2.0',
+        //     scope: 'https://outlook.office.com/tasks.readwrite'
+        // });
+        
+        this._token = this.authenticator.tokens.get('AzureAD');
         if (this._token == null) {
             this.login();
         }
