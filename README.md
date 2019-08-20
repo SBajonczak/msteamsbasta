@@ -22,7 +22,7 @@ The application is built using the `build` Gulp task.
 npm i -g gulp gulp-cli
 gulp build
 ```
-
+ 
 ## Building the manifest
 
 To create the Microsoft Teams Apps manifest, run the `manifest` Gulp task. This will generate and validate the package and finally create the package (a zip file) in the `package` folder. The manifest will be validated against the schema and dynamically populated with values from the `.env` file.
