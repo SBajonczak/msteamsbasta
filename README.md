@@ -1,5 +1,4 @@
 # Basta! SuperTodo - Microsoft Teams App
-
 This is an example app to simply create a tab in Teams. This Tab will can aggregate 
 ## Getting started with Microsoft Teams Apps development
 
