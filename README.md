@@ -3,7 +3,6 @@ This is an example app to simply create a tab in Teams. This Tab will can aggreg
 ## Getting started with Microsoft Teams Apps development
 
 Head on over to [Microsoft Teams official documentation](https://developer.microsoft.com/en-us/microsoft-teams) to learn how to build Microsoft Teams Tabs or the [Microsoft Teams Yeoman generator Wiki](https://github.com/OfficeDev/generator-teams/wiki) for details on how this solution is set up.
-
 ## Project setup
 
 All required source code are located in the `./src` folder - split into two parts
