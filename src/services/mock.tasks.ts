@@ -3,7 +3,7 @@ import * as _ from "lodash";
 
 import { ITodoService } from './ITodoService';
 
-export class OutlookTasks implements ITodoService {
+export class MockTasks implements ITodoService {
     
 
     private mockData:ITodo[];
@@ -12,7 +12,6 @@ export class OutlookTasks implements ITodoService {
         this.mockData=[{
             id:"123",
             completed:false,
-            importance: null,
             title:"Test"
         }];
     }

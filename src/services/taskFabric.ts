@@ -1,13 +1,15 @@
 import {OutlookTasks} from './outlook.tasks';
 import { ITodo } from '../core';
-import { Utilities } from '@microsoft/office-js-helpers';
-
+import { ITodoService } from './ITodoService';
+import {MockTasks} from './mock.tasks';
 
 export class taskFabric {
     outlookService:OutlookTasks;
+    mockService :ITodoService;
     constructor(){
         // Implementing the Outlook Service (It perform the autologin also)
         this.outlookService = new OutlookTasks();
+        this.mockService = new MockTasks();
     }
     
     /**
@@ -15,10 +17,14 @@ export class taskFabric {
      * Get all Elements.
      */
     async get(): Promise<ITodo[]> {
-        // Furst get all outlook tasks
-        let outlookTaks=  await this.getOutlookTasks();
-    
-        return outlookTaks;
+        // First get all outlook tasks
+        let outlookTasks=  await this.getOutlookTasks();
+        // Now get the mocked tasks
+        let mockTasks = await this.mockService.get().then(results=>{
+            return results;
+        });
+        // conact the results
+        return outlookTasks.concat(mockTasks);;
     }
 
     /**
