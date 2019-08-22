@@ -9,15 +9,9 @@ import { ITodo, IProfile } from '../core';
  * Microsoft Teams releases.
  */
 import { Authenticator, IToken, Utilities } from '@microsoft/office-js-helpers';
+import { ITodoService } from './ITodoService';
 
-interface ITodoService {
-    authenticator: Authenticator;
-    login: () => Promise<IToken>;
-    get: () => Promise<ITodo[]>;
-    create: (todo: ITodo) => Promise<ITodo>;
-    delete: (todo: ITodo) => Promise<boolean>;
-    markAsComplete: (todo: ITodo) => Promise<ITodo>;
-}
+
 
 export class OutlookTasks implements ITodoService {
     private _token: IToken;
