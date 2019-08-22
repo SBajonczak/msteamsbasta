@@ -1,33 +1,29 @@
-import { ITodo, IProfile } from '../core';
+import { ITodo } from '../core';
+import * as _ from "lodash";
 
-/**
- * We are using OfficeHelpers library as it allows us to complete authentication
- * with relative ease and also provides other useful Utilities.
- *
- * Note: We have included a beta version of OfficeHelpers that has support for
- * MicrosoftTeams and the API signatures might change when OfficeHelpers for
- * Microsoft Teams releases.
- */
-import { Authenticator, IToken, Utilities } from '@microsoft/office-js-helpers';
 import { ITodoService } from './ITodoService';
 
 export class OutlookTasks implements ITodoService {
-    private _token: IToken;
+    
 
     private mockData:ITodo[];
 
     constructor() {
-        this.mockData=[];
-     
+        this.mockData=[{
+            id:"123",
+            completed:false,
+            importance: null,
+            title:"Test"
+        }];
     }
 
    
     async get(): Promise<ITodo[]> {
-
         return this.mockData;
     }
 
     async create(todo: ITodo): Promise<ITodo> {
+        todo.id =_.uniqueId();
         this.mockData.push(todo);
         return todo;
     }
