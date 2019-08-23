@@ -22,6 +22,7 @@ import { ITodo } from "../../core";
  */
 export interface IBastaSuperTodoTabState extends ITeamsBaseComponentState {
   entityId?: string;
+  todos: ITodo[];
 }
 
 /**
@@ -33,19 +34,20 @@ export interface IBastaSuperTodoTabProps extends ITeamsBaseComponentProps {}
  * Implementation of the Basta! SuperTodo content page
  */
 export class BastaSuperTodoTab extends TeamsBaseComponent<
-  IBastaSuperTodoTabProps,
-  IBastaSuperTodoTabState
-> {
-  todoData: Array<ITodo>;
-  taskFabric: taskFabric;
-  public componentWillMount() {
-    this.taskFabric = new taskFabric();
-    // Initial with an empty array
-    this.todoData = new Array<ITodo>();
+IBastaSuperTodoTabProps,IBastaSuperTodoTabState> {
 
+  taskFabric: taskFabric;
+
+  public componentWillMount() {
+    // Load the Taskfabric
+    this.taskFabric = new taskFabric();
+    
     this.updateTheme(this.getQueryVariable("theme"));
+
+    // Set initial state
     this.setState({
-      fontSize: this.pageFontSize()
+      fontSize: this.pageFontSize(),
+      todos: []
     });
 
     if (this.inTeams()) {
@@ -56,16 +58,13 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
           entityId: context.entityId
         });
       });
-      // Load Tasks from outlook.
-      this.taskFabric.get().then(tasks=> {
-        this.todoData = tasks;
-      });
-
     } else {
-      this.setState({
-        entityId: "This is not hosted in Microsoft Teams"
-      });
     }
+    this.taskFabric.get().then(result => {
+      this.setState({
+        todos: result
+      });
+    });
   }
 
   /**
@@ -88,17 +87,17 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
         <Surface>
           <Panel>
             <PanelHeader>
-              <div style={styles.header}>This is your tab</div>
+              <div style={styles.header}>Super Todo</div>
             </PanelHeader>
             <PanelBody>
               <div style={styles.section}>{this.state.entityId}</div>
               <div style={styles.section}>
-                <PrimaryButton>A sample button</PrimaryButton>
+                {this.state.todos.map(todo => {
+                  return <span key={todo.id}>Titel: {todo.title}</span>;
+                })}
               </div>
             </PanelBody>
-            <PanelFooter>
-              <div style={styles.footer}>(C) Copyright Wir</div>
-            </PanelFooter>
+            <PanelFooter />
           </Panel>
         </Surface>
       </TeamsThemeContext.Provider>

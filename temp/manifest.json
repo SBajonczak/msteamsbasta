@@ -1,0 +1,51 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.5/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.5",
+  "id": "0b24e650-c0fc-11e9-b869-97124f003f99",
+  "version": "0.0.1",
+  "packageName": "bastatodo",
+  "developer": {
+    "name": "Wir",
+    "websiteUrl": "https://bastateams.azurewebsites.net",
+    "privacyUrl": "https://bastateams.azurewebsites.net/privacy.html",
+    "termsOfUseUrl": "https://bastateams.azurewebsites.net/tou.html"
+  },
+  "name": {
+    "short": "Basta! SuperTodo",
+    "full": "Basta! SuperTodo"
+  },
+  "description": {
+    "short": "TODO: add short description here",
+    "full": "TODO: add full description here"
+  },
+  "icons": {
+    "outline": "icon-outline.png",
+    "color": "icon-color.png"
+  },
+  "accentColor": "#D85028",
+  "configurableTabs": [
+    {
+      "configurationUrl": "https://bastateams.azurewebsites.net/bastaSuperTodoTab/config.html",
+      "canUpdateConfiguration": true,
+      "scopes": [
+        "team"
+      ],
+      "sharePointPreviewImage": "https://bastateams.azurewebsites.net/assets/bastaSuperTodoTab-preview.png",
+      "supportedSharePointHosts": [
+        "sharePointFullPage",
+        "sharePointWebPart"
+      ]
+    }
+  ],
+  "staticTabs": [],
+  "bots": [],
+  "connectors": [],
+  "composeExtensions": [],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "bastateams.azurewebsites.net"
+  ]
+}

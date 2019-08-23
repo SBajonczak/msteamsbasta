@@ -1,4 +1,4 @@
-import { ITodo, IProfile } from '../core';
+import { ITodo } from '../core';
 
 /**
  * We are using OfficeHelpers library as it allows us to complete authentication

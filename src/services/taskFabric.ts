@@ -4,11 +4,11 @@ import { ITodoService } from './ITodoService';
 import {MockTasks} from './mock.tasks';
 
 export class taskFabric {
-    outlookService:OutlookTasks;
+    outlookService:ITodoService;
     mockService :ITodoService;
     constructor(){
         // Implementing the Outlook Service (It perform the autologin also)
-        this.outlookService = new OutlookTasks();
+        this.outlookService = new MockTasks();
         this.mockService = new MockTasks();
     }
     
@@ -23,8 +23,9 @@ export class taskFabric {
         let mockTasks = await this.mockService.get().then(results=>{
             return results;
         });
+        console.log(mockTasks.length);
         // conact the results
-        return outlookTasks.concat(mockTasks);;
+        return mockTasks;
     }
 
     /**
