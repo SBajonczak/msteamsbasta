@@ -51,6 +51,7 @@
     "gulp-sourcemaps": "^2.6.5",
     "gulp-token-replace": "1.1.5",
     "gulp-zip": "4.2.0",
+    "hellojs": "^2.0.0-4",
     "jest": "^24.5.0",
     "lodash": "^4.17.15",
     "morgan": "1.9.1",
