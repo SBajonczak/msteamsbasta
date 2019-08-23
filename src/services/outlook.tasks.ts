@@ -8,12 +8,15 @@ import { ITodo } from '../core';
  * MicrosoftTeams and the API signatures might change when OfficeHelpers for
  * Microsoft Teams releases.
  */
-import { Authenticator, IToken, Utilities } from '@microsoft/office-js-helpers';
+import { Authenticator, IToken, Utilities,DefaultEndpoints } from '@microsoft/office-js-helpers';
+
+
+
 import { ITodoService } from './ITodoService';
 
 
 
-export class OutlookTasks implements ITodoService {
+export class OutlookService implements ITodoService {
     private _token: IToken;
     private _baseUrl: string = 'https://outlook.office.com/api/v2.0';
     private _login: boolean;
@@ -63,7 +66,7 @@ export class OutlookTasks implements ITodoService {
         //     scope: 'https://outlook.office.com/tasks.readwrite'
         // });
         
-        this._token = this.authenticator.tokens.get('AzureAD');
+        this._token = this.authenticator.tokens.get(DefaultEndpoints.AzureAD);
         if (this._token == null) {
             this.login();
         }
@@ -75,12 +78,14 @@ export class OutlookTasks implements ITodoService {
          * the OfficeHelpers library.
          */
         try {
-            this._token = await this.authenticator.authenticate('Microsoft', false, true /* Use Microsoft Teams Dialog */);
+            debugger;
+            this._token = await this.authenticator.authenticate(DefaultEndpoints.AzureAD, true, true /* Use Microsoft Teams Dialog */);
             return this._token;
         }
         catch (error) {
+            debugger;
             Utilities.log(error);
-            throw new Error('Failed to login using your Microsoft Account');
+            throw new Error('Failed to login using your Azure AD Account');
         };
     }
 

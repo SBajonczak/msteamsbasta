@@ -10,9 +10,16 @@ export class MockTasks implements ITodoService {
 
     constructor() {
         this.mockData=[{
-            id:"123",
+            id:_.uniqueId(),
             completed:false,
-            title:"Test"
+            isEditMode:false,
+            title:"Important Supertask"
+        },
+        {
+            id:_.uniqueId(),
+            completed:false,
+            isEditMode:false,
+            title:"Super Task"
         }];
     }
 
