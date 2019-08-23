@@ -14,7 +14,8 @@ import TeamsBaseComponent, { ITeamsBaseComponentProps, ITeamsBaseComponentState 
 import * as microsoftTeams from "@microsoft/teams-js";
 
 export interface IBastaSuperTodoTabConfigState extends ITeamsBaseComponentState {
-    value: string;
+    GraphClientId: string
+
 }
 
 export interface IBastaSuperTodoTabConfigProps extends ITeamsBaseComponentProps {
@@ -37,7 +38,7 @@ export class BastaSuperTodoTabConfig  extends TeamsBaseComponent<IBastaSuperTodo
 
             microsoftTeams.getContext((context: microsoftTeams.Context) => {
                 this.setState({
-                    value: context.entityId
+                    GraphClientId: context.entityId
                 });
                 this.setValidityState(true);
             });
@@ -49,7 +50,7 @@ export class BastaSuperTodoTabConfig  extends TeamsBaseComponent<IBastaSuperTodo
                     contentUrl: host + "/bastaSuperTodoTab/?data=",
                     suggestedDisplayName: "Basta! SuperTodo",
                     removeUrl: host + "/bastaSuperTodoTab/remove.html",
-                    entityId: this.state.value
+                    entityId: this.state.GraphClientId
                 });
                 saveEvent.notifySuccess();
             });
@@ -80,13 +81,13 @@ export class BastaSuperTodoTabConfig  extends TeamsBaseComponent<IBastaSuperTodo
                             <div style={styles.section}>
                                 <Input
                                     autoFocus
-                                    placeholder="Enter a value here"
-                                    label="Enter a value"
-                                    errorLabel={!this.state.value ? "This value is required" : undefined}
-                                    value={this.state.value}
+                                    placeholder="Enter a ClientID here"
+                                    label="Enter a ClientID"
+                                    errorLabel={!this.state.GraphClientId ? "This value is required" : undefined}
+                                    value={this.state.GraphClientId}
                                     onChange={(e) => {
                                         this.setState({
-                                            value: e.target.value
+                                            GraphClientId: e.target.value
                                         });
                                     }}
                                     required />
