@@ -9,20 +9,15 @@ export class MockTasks implements ITodoService {
     private mockData:ITodo[];
 
     constructor() {
-        this.mockData=[{
-            id:_.uniqueId(),
-            completed:false,
-            isEditMode:false,
-            title:"Important Supertask"
-        },
-        {
-            id:_.uniqueId(),
-            completed:false,
-            isEditMode:false,
-            title:"Super Task"
-        }];
+        
     }
-
+    private static _MockItems:ITodo[] = [
+        {completed:false,   id: "0",    importance: "high",     isEditMode:false,   title :"Milch kaufen",          provider:new MockTasks() },
+        {completed:false,   id: "1",    importance: "",         isEditMode:false,   title :"Brötchen holen",        provider:new MockTasks() },
+        {completed:false,   id: "2",    importance: "",         isEditMode:false,   title :"BASTA!-Vortrag",        provider:new MockTasks() },
+        {completed:false,   id: "3",    importance: "",         isEditMode:false,   title :"Kinder hüten",          provider:new MockTasks() },
+        {completed:false,   id: "4",    importance: "",         isEditMode:false,   title :"Kalte Fusion schaffen", provider:new MockTasks() }
+    ]
    
     async get(): Promise<ITodo[]> {
         return this.mockData;

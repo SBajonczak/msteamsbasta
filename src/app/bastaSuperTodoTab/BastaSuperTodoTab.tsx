@@ -18,6 +18,8 @@ import * as microsoftTeams from "@microsoft/teams-js";
 import { taskFabric } from "../../services";
 import { ITodo } from "../../core";
 import * as _ from "lodash";
+import { MockTasks } from "../../services/mock.tasks";
+import TaskManager from "../../components/TaskManager/TaskManager";
 
 /**
  * State for the bastaSuperTodoTabTab React component
@@ -86,7 +88,9 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
       title: "New Title",
       completed: false,
       isEditMode: true,
-      id: _.uniqueId()
+      id: _.uniqueId(),
+      // TODO: make user choose provider for task persisting
+      provider:new MockTasks()
     };
     this.taskFabric.persist(newElement);
     this.reloadData();
@@ -124,7 +128,8 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
               <div>Super Todo</div>
             </PanelHeader>
             <PanelBody>
-              <div>{this.state.entityId}</div>
+              
+              {/* <div>{this.state.entityId}</div>
               <PrimaryButton onClick={this.createEmptyOne}>
                 Neuer Eintrag
               </PrimaryButton>
@@ -167,7 +172,8 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
                     </div>
                   );
                 })}
-              </div>
+              </div> */}
+              <TaskManager TaskGateway={this.taskFabric} />
             </PanelBody>
             <PanelFooter />
           </Panel>
