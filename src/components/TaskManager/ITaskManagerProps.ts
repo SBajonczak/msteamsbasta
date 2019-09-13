@@ -1,5 +1,5 @@
-import { TaskFabric } from "../../services/TaskFabric";
+import { taskFabric } from "../../services/taskFabric";
 
 export interface ITaskManagerProps{
-    TaskGateway:TaskFabric;
+    TaskGateway:taskFabric;
 }

@@ -1,4 +1,5 @@
-import { ITodo } from "../../typings/ITodo";
+import { ITodo } from "../../core";
+
 
 export interface ITaskListState{
     tasks : ITodo[];

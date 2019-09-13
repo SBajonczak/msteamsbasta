@@ -1,5 +1,7 @@
-import { ITodo } from "../../typings/ITodo";
+import { ITodo } from "../../core";
+
 
 export interface ITaskManagerState{
     tasks:ITodo[];
+    showNewForm:boolean;
 }
