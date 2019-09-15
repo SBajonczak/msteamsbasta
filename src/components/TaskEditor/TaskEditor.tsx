@@ -11,21 +11,15 @@ import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
 
 
-import { autobind } from 'office-ui-fabric-react/lib/Utilities';
-import { ITodoService } from "../../typings/ITodoService";
-import { ITodo } from "../../typings/ITodo";
+// import { autobind } from 'office-ui-fabric-react/lib/Utilities';
+import { ITodo } from "../../core";
+import { ITodoService } from "../../services/ITodoService";
 
 export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskEditorState>{
     private _isEditMode:boolean;
     private _todo:ITodo;
-    /*
-    id: string,
-    title: string,
-    completed: boolean,
-    isEditMode:boolean,
-    importance?: string,
-    provider:ITodoService
-    */
+    _gatewaySelected: boolean;
+   
     constructor(p,s){
         super(p,s);
 
@@ -43,12 +37,11 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
                 id : "-1",
                 importance:"",
                 isEditMode:false,
-                provider: undefined,
                 title : ""
             }
         }
         else{
-            this._todo = this.props.todo
+            this._todo = this.props.todo as ITodo;
         }
     }
 
@@ -73,22 +66,23 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     private updateSelectedGateway(event:any, option?: IDropdownOption){
-        this._todo.provider = this.props.gateways.filter((g:ITodoService) =>{ if(g.displayName === option.key){return g;} })[0];
+        this._gatewaySelected = true;
+        this._todo.provider = (this.props.gateways as ITodoService[]).filter((g:ITodoService) =>{ if(g.displayName === (option as IDropdownOption).key){return g;} })[0];
         
     }
 
     private async onOkClick(event:any){
-        
+        // wenn kein Gateway aka ITodoService ausgewählt wurde, kann man jetzt diese Button gar nicht bekommen
         if(this.props.mode === FormMode.New){
             console.log(this._todo);
-            let newTask = await this._todo.provider.create(this._todo);
+            let newTask = await (this._todo.provider as ITodoService).create(this._todo);
             debugger;
             this.onCancelClick({});
         }
         else{
-            // Wir haben kein simples Update?!
+            // Wir haben kein simples Update?! Nur MaskAsComplete?!
             if(this._todo.completed){
-                this._todo.provider.markAsComplete(this._todo).then(() =>{this.onCancelClick({});});
+                (this._todo.provider as ITodoService).markAsComplete(this._todo).then(() =>{this.onCancelClick({});});
             }
         }
     }
@@ -100,33 +94,29 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     public render():React.ReactElement<ITaskEditorProps>{
-        const gatewayOptions:IDropdownOption[] = this.props.gateways.map( (gateway:ITodoService) => {
+
+    
+        const gatewayOptions:IDropdownOption[] = (this.props.gateways as ITodoService[]).map( (gateway:ITodoService) => {
             return {key:gateway.displayName, text:gateway.displayName};
         });
-        let form = null;
+        
+        let form;
         if(this.props.mode === FormMode.New){
             
             form =
             <div>
-                <div><Dropdown label="Wo soll die Aufgabe gespeichert werden?" options={gatewayOptions} onChange={this.updateSelectedGateway.bind(this)} /></div>
+                <div><Dropdown label="Wo soll die Aufgabe gespeichert werden?" options={gatewayOptions} defaultSelectedKey={gatewayOptions[0].key} onChange={this.updateSelectedGateway.bind(this)} /></div>
                 <div><TextField label="Titel" onChange={this.updateTitle.bind(this)}/></div>
                 <div><Toggle label="Wichtig" onChange={this.updateImportance.bind(this)}/></div>
                 <div>
-                    {this.renderOkButton()}
+                {
+                            this._gatewaySelected
+                            ? this.renderOkButton()
+                            :null
+                        }
                     {this.renderCancelButton()}
                 </div>
             </div>;
-        }
-        else{
-            form = <div>
-                    <div><TextField label="Titel" onChange={this.updateTitle} value={this.props.todo.title}/></div>
-                    <div><Toggle label="Wichtig" onChange={this.updateImportance} defaultChecked={this.props.todo.importance === "Hoch"}/></div>
-                    <div><Toggle label="Edledigt" onChange={this.updateCompletion} defaultChecked={false}/></div>
-                    <div>
-                        {this.renderOkButton()}
-                        {this.renderCancelButton()}
-                    </div>
-                </div>;
         }
         return form;
     }

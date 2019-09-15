@@ -6,5 +6,5 @@ export interface ITodo {
     completed: boolean,
     isEditMode:boolean,
     importance?: string,
-    provider:ITodoService
+    provider?:ITodoService
 }

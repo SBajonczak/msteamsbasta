@@ -1,5 +1,5 @@
-import { ITodo } from "../../typings/ITodo";
-import { ITodoService } from "../../typings/ITodoService";
+import { ITodo } from "../../core";
+import { ITodoService } from "../../services/ITodoService";
 
 export enum FormMode{
     New,

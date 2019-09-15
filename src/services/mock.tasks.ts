@@ -6,6 +6,8 @@ import { ITodoService } from './ITodoService';
 export class MockTasks implements ITodoService {
     
 
+    public displayName:string;
+
     private _mockData:ITodo[];
 
     constructor() {

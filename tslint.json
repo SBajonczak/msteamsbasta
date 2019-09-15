@@ -25,6 +25,7 @@
                 "trace"
             ]
         },
+        "no-null-keyword": false,
         "object-literal-sort-keys": false
     },
     "jsRules": {

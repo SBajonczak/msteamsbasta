@@ -16,62 +16,64 @@ import { ITodo } from '../../core';
 export default class TaskManager extends React.Component<ITaskManagerProps, ITaskManagerState> {
 
 
-  constructor(p,s){
-    super(p,s);
-    
+  constructor(p, s) {
+    super(p, s);
+
     this.state = {
-      tasks:[],
-      showNewForm : false
+      tasks: [],
+      showNewForm: false
     };
   }
 
-  async componentDidMount(){
+  async componentDidMount() {
     this.fetchTasks();
   }
 
-  async fetchTasks(){
+  async fetchTasks() {
     let tasks = await this.props.TaskGateway.get();
-    this.setState({tasks:tasks});
+    this.setState({ tasks: tasks });
   }
 
-  public showNewForm(){
-    this.setState({showNewForm:true});
+  public showNewForm() {
+    this.setState({ showNewForm: true });
   }
 
-  public hideNewForm(){
-    this.setState({showNewForm:false},() =>{
+  public hideNewForm() {
+    this.setState({ showNewForm: false }, () => {
       this.fetchTasks();
     });
   }
 
-  public async markAsComplete(task:ITodo){
+  public async markAsComplete(task: ITodo) {
 
-    
-    return new Promise<ITodo>((resolve,reject) =>{
-    task.provider.markAsComplete(task).then((updatedTask:ITodo) =>{
-      
-      var newTasks = this.state.tasks.map((oldTask:ITodo) =>{
-        if(oldTask.provider == updatedTask.provider && oldTask.id == updatedTask.id){
-          return updatedTask;
-        }
-        else{
-          return oldTask;
-        }
-      });
-      this.setState({tasks:newTasks});
-    });  
-  });
+
+    return new Promise<ITodo>((resolve, reject) => {
+      if (task.provider) {  // When privider is set.
+        task.provider.markAsComplete(task).then((updatedTask: ITodo) => {
+
+          var newTasks = this.state.tasks.map((oldTask: ITodo) => {
+            if (oldTask.provider == updatedTask.provider && oldTask.id == updatedTask.id) {
+              return updatedTask;
+            }
+            else {
+              return oldTask;
+            }
+          });
+          this.setState({ tasks: newTasks });
+        });
+      }
+    });
   }
 
   public render(): React.ReactElement<ITaskManagerProps> {
     return (
       <div>
         <TaskManagerToolbar showNewForm={this.showNewForm.bind(this)} allowNewButton={this.state.showNewForm} />
-        { this.state.showNewForm
+        {this.state.showNewForm
           ? <TaskEditor mode={FormMode.New} gateways={[this.props.TaskGateway.mockService]} hideNewForm={this.hideNewForm.bind(this)} />
           : null
         }
-        { !this.state.showNewForm
+        {!this.state.showNewForm
           ? <TaskList tasks={this.state.tasks} onMarkComplete={this.markAsComplete.bind(this)} />
           : null
         }

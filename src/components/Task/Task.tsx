@@ -31,18 +31,16 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
 
 
   public render(): React.ReactElement<ITaskProps> {
-    
-    
 
     return (
         <div className={styles.row}>
           <div className={styles.col1}>
-              <Checkbox label={this.state.todo.title} disabled={this.state.todo.completed} checked={this.state.todo.completed} />
+              <Checkbox key="1" label={this.state.todo.title} disabled={this.state.todo.completed} checked={this.state.todo.completed} />
           </div>
           <div className={styles.col2}>
             {
               !this.props.task.completed
-              ? <IconButton  iconProps={{iconName:"Completed"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
+              ? <IconButton key="1"  iconProps={{iconName:"Completed"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
               : null
             }
           </div>
