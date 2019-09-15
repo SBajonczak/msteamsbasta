@@ -230,7 +230,7 @@ task('styles', styles);
 /**
  * Build task, that uses webpack and injects scripts into pages
  */
-task('build', series('webpack', 'styles', 'static:copy', 'static:inject'));
+task('build', series('styles','webpack' , 'static:copy', 'static:inject'));
 
 /**
  * Replace parameters in the manifest
