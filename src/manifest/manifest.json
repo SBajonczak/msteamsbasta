@@ -15,8 +15,8 @@
     "full": "Basta! SuperTodo"
   },
   "description": {
-    "short": "TODO: add short description here",
-    "full": "TODO: add full description here"
+    "short": "Example for the Basta conference 2019!",
+    "full": "A small example App, for demonstrating the Tab functionality in Teams."
   },
   "icons": {
     "outline": "icon-outline.png",
