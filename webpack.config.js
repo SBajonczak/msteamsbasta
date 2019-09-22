@@ -65,11 +65,7 @@ var config = [{
     {
         entry: {
             client: [
-                __dirname + '/src/app/scripts/client.ts',
-                __dirname + '/src/components/Task/Task.module.scss',
-                __dirname + '/src/components/TaskList/TaskList.module.scss',
-                __dirname + '/src/components/TaskManager/TaskManager.module.scss',
-                __dirname + '/src/components/TaskManagerToolbar/TaskManagerToolbar.module.scss'
+                __dirname + '/src/app/scripts/client.ts'
             ]
         },
         mode: debug ? 'development' : 'production',

@@ -3,7 +3,7 @@ import { Checkbox } from 'office-ui-fabric-react/lib/Checkbox';
 import { IconButton } from 'office-ui-fabric-react';
 import { initializeIcons } from '@uifabric/icons';
 
-import styles from './Task.module.scss';
+// import styles from './Task.module.scss';
 import { ITaskProps } from './ITaskProps';
 import { ITaskState } from './ITaskListState';
 
@@ -33,11 +33,11 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
   public render(): React.ReactElement<ITaskProps> {
 
     return (
-        <div className={styles.row}>
-          <div className={styles.col1}>
+        <div >
+          <div >
               <Checkbox key="1" label={this.state.todo.title} disabled={this.state.todo.completed} checked={this.state.todo.completed} />
           </div>
-          <div className={styles.col2}>
+          <div >
             {
               !this.props.task.completed
               ? <IconButton key="1"  iconProps={{iconName:"Completed"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />

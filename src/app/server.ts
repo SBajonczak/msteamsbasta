@@ -17,9 +17,9 @@ log(`Initializing Microsoft Teams Express hosted App...`);
 require("dotenv").config();
 
 
-log(`Setup App Insights...`);
+// log(`Setup App Insights...`);
 // Set up app insights
-appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
+// appInsights.setup(process.env.APPINSIGHTS_INSTRUMENTATIONKEY).start();
 
 
 log(`Load all components...`);
