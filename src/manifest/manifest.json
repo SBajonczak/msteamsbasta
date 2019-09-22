@@ -47,5 +47,9 @@
   ],
   "validDomains": [
     "{{HOSTNAME}}"
-  ]
+  ],
+  "webApplicationInfo": {
+    "id": "6bb4c536-bc36-488d-a504-a8a571b9d782",
+    "resource": "https://login.microsoftonline.com/a5f19b89-4c2e-4259-859f-70cb61a9820f/oauth2/v2.0/authorize?resource=6bb4c536-bc36-488d-a504-a8a571b9d782"
+  }
 }
