@@ -1,7 +1,7 @@
 import { ITodoService } from "../services/ITodoService";
 
 export interface ITodo {
-    id: string,
+    id: number,
     title: string,
     completed: boolean,
     isEditMode:boolean,

@@ -31,7 +31,7 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
         {
             this._todo = {
                 completed : false,
-                id : "-1",
+                id : -1,
                 importance:"",
                 isEditMode:false,
                 title : ""

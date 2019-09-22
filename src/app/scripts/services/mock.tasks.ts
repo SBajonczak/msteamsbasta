@@ -15,11 +15,11 @@ export class MockTasks implements ITodoService {
     }
 
     private static _MockItems:ITodo[] = [
-        {completed:false,   id: "0",    importance: "high",     isEditMode:false,   title :"Milch kaufen",          provider:new MockTasks() },
-        {completed:true,    id: "1",    importance: "",         isEditMode:false,   title :"Brötchen holen",        provider:new MockTasks() },
-        {completed:true,    id: "2",    importance: "",         isEditMode:false,   title :"BASTA!-Vortrag",        provider:new MockTasks() },
-        {completed:false,   id: "3",    importance: "",         isEditMode:false,   title :"Kinder hüten",          provider:new MockTasks() },
-        {completed:false,   id: "4",    importance: "",         isEditMode:false,   title :"Kalte Fusion schaffen", provider:new MockTasks() }
+        {completed:false,   id: 0,    importance: "high",     isEditMode:false,   title :"Milch kaufen",          provider:new MockTasks() },
+        {completed:true,    id: 1,    importance: "",         isEditMode:false,   title :"Brötchen holen",        provider:new MockTasks() },
+        {completed:true,    id: 2,    importance: "",         isEditMode:false,   title :"BASTA!-Vortrag",        provider:new MockTasks() },
+        {completed:false,   id: 3,    importance: "",         isEditMode:false,   title :"Kinder hüten",          provider:new MockTasks() },
+        {completed:false,   id: 4,    importance: "",         isEditMode:false,   title :"Kalte Fusion schaffen", provider:new MockTasks() }
     ];
    
     public async get():Promise<ITodo[]>{
@@ -30,8 +30,12 @@ export class MockTasks implements ITodoService {
 
     public async create(todo: ITodo):Promise<ITodo>{
         let that = this;
-        if (todo!= undefined){
-            todo.id= _.maxBy(this._mockData, (o)=>{return o.id}).id +1;
+        if (todo!= undefined && _!= undefined && this._mockData!= undefined){
+            let item =  _.maxBy(this._mockData, (o)=>{return o.id});
+            if (item!= undefined){
+                todo.id= item.id+1;
+            }
+            todo.id=0;
         }
         return new Promise<ITodo>((resolve) => {
             that._mockData.push(todo);
