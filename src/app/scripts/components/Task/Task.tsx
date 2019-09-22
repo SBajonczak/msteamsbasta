@@ -31,28 +31,49 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
 
   public render(): React.ReactElement<ITaskProps> {
 
+    let providerName:string="";
+  
+    switch(this.props.task.providerName){
+                case "Dummy":
+                  providerName="Mock";
+                  break;
+                case "planner":
+                  providerName="Planner";
+                  break;
+                case "sappi":
+                  providerName="Sap PI";
+                  break;
+                case "notes":
+                  providerName="Lotus Notes";
+                  break;
+              } 
+
     return (
         <div>
           <Tr>
-            <Td>
-            {
-              !this.props.task.completed
-              ? <IconButton key="1"
-              styles={{
-              root: {
-                selectors: {
-                  ':hover .ms-Button-icon': {
-                    color: 'green'
+            <Td  style={{ width: '220px'}}>
+            <div>
+              <div>
+              {
+                !this.props.task.completed
+                ? <IconButton key="1"
+                styles={{
+                root: {
+                  selectors: {
+                    ':hover .ms-Button-icon': {
+                      color: 'green'
+                    }
                   }
-                }
-              }}}
-              
-              iconProps={{iconName:"LocationCircle"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
-              : <IconButton key="1"  iconProps={{iconName:"Completed"}} />
-            }
+                }}}
+                iconProps={{iconName:"LocationCircle"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
+                : <IconButton key="1"  iconProps={{iconName:"Completed"}} />
+              }
 
-            <span>{this.state.todo.title}{this.props.task.importance=="high" ?<IconButton key="1"  iconProps={{iconName:"Important"}} /> :null}  </span>
+              <span>{this.state.todo.title}{this.props.task.importance=="high" ?<IconButton key="1"  iconProps={{iconName:"Important"}} /> :null}  </span>
+              </div>
+            </div>
             </Td>
+              <Td  style={{ textAlign: 'left'}}>{providerName}</Td>
           </Tr>
         </div>
     );

@@ -90,6 +90,7 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
       completed: false,
       isEditMode: true,
       id: -1,
+      providerName:"",
       // TODO: make user choose provider for task persisting
       provider:new MockTasks()
     };

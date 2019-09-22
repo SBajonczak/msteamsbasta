@@ -33,8 +33,7 @@ public render(): React.ReactElement<ITaskListProps> {
     <div className="ms-Grid" dir="ltr">
         <Table>
           <TBody>
-             <Tr><Th><h1>Aufgaben</h1></Th><Th>
-             </Th></Tr>
+             <Tr><Th  style={{ width: '220px'}}>Aufgabe</Th><Th>Ablageort</Th></Tr>
             {
               this.props.tasks.map((task:ITodo) =>{
                   return <Task task={task} onMarkComplete={this.onMarkComplete.bind(this)} />

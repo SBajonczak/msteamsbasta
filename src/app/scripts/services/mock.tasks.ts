@@ -15,11 +15,11 @@ export class MockTasks implements ITodoService {
     }
 
     private static _MockItems:ITodo[] = [
-        {completed:false,   id: 0,    importance: "high",     isEditMode:false,   title :"Milch kaufen",          provider:new MockTasks() },
-        {completed:true,    id: 1,    importance: "",         isEditMode:false,   title :"Brötchen holen",        provider:new MockTasks() },
-        {completed:true,    id: 2,    importance: "",         isEditMode:false,   title :"BASTA!-Vortrag",        provider:new MockTasks() },
-        {completed:false,   id: 3,    importance: "",         isEditMode:false,   title :"Kinder hüten",          provider:new MockTasks() },
-        {completed:false,   id: 4,    importance: "",         isEditMode:false,   title :"Kalte Fusion schaffen", provider:new MockTasks() }
+        {completed:false,   id: 0,    importance: "high",     isEditMode:false,   title :"Milch kaufen",          provider:new MockTasks(), providerName:"planner" },
+        {completed:true,    id: 1,    importance: "",         isEditMode:false,   title :"Brötchen holen",        provider:new MockTasks(), providerName:"planner" },
+        {completed:true,    id: 2,    importance: "",         isEditMode:false,   title :"BASTA!-Vortrag",        provider:new MockTasks(), providerName:"notes" },
+        {completed:false,   id: 3,    importance: "",         isEditMode:false,   title :"Kinder hüten",          provider:new MockTasks(), providerName:"sappi" },
+        {completed:false,   id: 4,    importance: "",         isEditMode:false,   title :"Kalte Fusion schaffen", provider:new MockTasks(), providerName:"planner" }
     ];
    
     public async get():Promise<ITodo[]>{

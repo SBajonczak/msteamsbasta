@@ -34,10 +34,9 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
                 id : -1,
                 importance:"",
                 isEditMode:false,
-                title : ""
+                title : "",
+                providerName:"Dummy"
             }
-              
-        
         }
         else{
             this._todo = this.props.todo as ITodo;
@@ -50,7 +49,6 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     private updateImportance(event:any, newValue:boolean){
-        console.log(newValue);
         this._todo.importance = newValue ? "high" : "";
     }
 
@@ -66,14 +64,14 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     private updateSelectedGateway(event:any, option?: IDropdownOption){
-        this._gatewaySelected = true;
-        this._todo.provider = (this.props.gateways as ITodoService[]).filter((g:ITodoService) =>{ if(g.displayName === (option as IDropdownOption).key){return g;} })[0];
-        
+        console.log("Selected option", option);
+
+        this._todo.providerName =(option as IDropdownOption).key.toString();
     }
 
     private async onOkClick(event:any){
         if(this.props.mode === FormMode.New){
-            console.log(this._todo.provider);
+            console.log(this._todo);
             let newTask = await (this._todo.provider as ITodoService).create(this._todo);
             this.props.hideNewForm();
         }
@@ -92,13 +90,17 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     public render():React.ReactElement<ITaskEditorProps>{
 
     
-        const gatewayOptions:IDropdownOption[] = (this.props.gateways as ITodoService[]).map( (gateway:ITodoService) => {
-            return {key:gateway.displayName, text:gateway.displayName};
-        });
+        const gatewayOptions:IDropdownOption[] =[
+            {key:"Dummy", text:"Mock Service"},
+            {key:"planner", text:"Planner"},
+            {key:"sappi", text:"SAP PI"},
+            {key:"notes", text:"Lotus Notes"},
+        ];
 
         if (this.props.gateways != undefined && this.props.gateways.length>0){
             this._todo.provider = this.props.gateways[0];
         }
+
         let form;
         if(this.props.mode === FormMode.New){
             
