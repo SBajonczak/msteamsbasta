@@ -9,9 +9,6 @@ import { Toggle } from 'office-ui-fabric-react/lib/Toggle';
 import { Label } from 'office-ui-fabric-react/lib/Label';
 import { DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dropdown, DropdownMenuItemType, IDropdownStyles, IDropdownOption } from 'office-ui-fabric-react/lib/Dropdown';
-
-
-// import { autobind } from 'office-ui-fabric-react/lib/Utilities';
 import { ITodo } from "../../core";
 import { ITodoService } from "../../services/ITodoService";
 
@@ -39,6 +36,8 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
                 isEditMode:false,
                 title : ""
             }
+              
+        
         }
         else{
             this._todo = this.props.todo as ITodo;
@@ -67,6 +66,8 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
 
     private updateSelectedGateway(event:any, option?: IDropdownOption){
         this._gatewaySelected = true;
+        console.log("Selected Option:");
+        console.log(option);
         this._todo.provider = (this.props.gateways as ITodoService[]).filter((g:ITodoService) =>{ if(g.displayName === (option as IDropdownOption).key){return g;} })[0];
         
     }
@@ -74,10 +75,10 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     private async onOkClick(event:any){
         // wenn kein Gateway aka ITodoService ausgewählt wurde, kann man jetzt diese Button gar nicht bekommen
         if(this.props.mode === FormMode.New){
-            console.log(this._todo);
+            console.log("Selected Provider:");
+            console.log(this._todo.provider);
             let newTask = await (this._todo.provider as ITodoService).create(this._todo);
-            debugger;
-            this.onCancelClick({});
+            this.props.hideNewForm();
         }
         else{
             // Wir haben kein simples Update?! Nur MaskAsComplete?!
@@ -88,9 +89,7 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     private onCancelClick(event:any){
-        debugger;
         this.props.hideNewForm();
-        // unmounten hier
     }
 
     public render():React.ReactElement<ITaskEditorProps>{
@@ -99,7 +98,10 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
         const gatewayOptions:IDropdownOption[] = (this.props.gateways as ITodoService[]).map( (gateway:ITodoService) => {
             return {key:gateway.displayName, text:gateway.displayName};
         });
-        
+
+        if (this.props.gateways != undefined && this.props.gateways.length>0){
+            this._todo.provider = this.props.gateways[0];
+        }
         let form;
         if(this.props.mode === FormMode.New){
             
@@ -110,10 +112,10 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
                 <div><Toggle label="Wichtig" onChange={this.updateImportance.bind(this)}/></div>
                 <div>
                 {
-                            this._gatewaySelected
-                            ? this.renderOkButton()
-                            :null
-                        }
+                    this._gatewaySelected
+                    ? this.renderOkButton()
+                    :null
+                                            }
                     {this.renderCancelButton()}
                 </div>
             </div>;

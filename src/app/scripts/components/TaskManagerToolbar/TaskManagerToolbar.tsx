@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './TaskManagerToolbar.module.scss';
 import { ITaskManagerToolbarProps } from './ITaskManagerToolbarProps';
 import { ITaskManagerToolbarState } from './ITaskManagerToolbarState';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';

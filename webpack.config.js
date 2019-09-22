@@ -151,14 +151,14 @@ var config = [{
     }
 ];
 
-if (lint !== false) {
-    config[0].plugins.push(new TSLintPlugin({
-        files: ['./src/app/*.ts']
-    }));
-    config[1].plugins.push(new TSLintPlugin({
-        files: ['./src/app/scripts/**/*.ts', './src/app/scripts/**/*.tsx']
-    }));
-}
+// if (lint !== false) {
+//     config[0].plugins.push(new TSLintPlugin({
+//         files: ['./src/app/*.ts']
+//     }));
+//     config[1].plugins.push(new TSLintPlugin({
+//         files: ['./src/app/scripts/**/*.ts', './src/app/scripts/**/*.tsx']
+//     }));
+// }
 
 
 module.exports = config;

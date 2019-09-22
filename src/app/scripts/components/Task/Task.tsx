@@ -38,7 +38,18 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
             {/* Clock */}
             {
               !this.props.task.completed
-              ? <IconButton key="1"  iconProps={{iconName:"LocationCircle"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
+              ? <IconButton key="1"
+              
+              styles={{
+              root: {
+                selectors: {
+                  ':hover .ms-Button-icon': {
+                    color: 'green'
+                  }
+                }
+              }}}
+              
+              iconProps={{iconName:"LocationCircle"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
               : <IconButton key="1"  iconProps={{iconName:"Completed"}} />
             }
 

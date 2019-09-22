@@ -16,11 +16,12 @@ import TeamsBaseComponent, {
   ITeamsBaseComponentState
 } from "msteams-react-base-component";
 import * as microsoftTeams from "@microsoft/teams-js";
-import { taskFabric } from "../../services";
-import { ITodo } from "../../core";
+import { taskFabric } from "../services";
+import { ITodo } from "../core";
 import * as _ from "lodash";
-import { MockTasks } from "../../services/mock.tasks";
-import TaskManager from "../../components/TaskManager/TaskManager";
+import { MockTasks } from "../services/mock.tasks";
+import TaskManager from "../components/TaskManager/TaskManager";
+// import { GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
 
 /**
  * State for the bastaSuperTodoTabTab React component

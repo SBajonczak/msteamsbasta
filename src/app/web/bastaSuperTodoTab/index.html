@@ -14,6 +14,11 @@
         instrumentationKey: "{{APPINSIGHTS_INSTRUMENTATIONKEY}}"
     });
   
+// var req = new XMLHttpRequest();
+//     req.open("GET","https://graph.microsoft.com/v1.0/me/planner/tasks");
+//     req.send();
+
+
     window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length && appInsights.trackPageView();
   </script>
 </style>

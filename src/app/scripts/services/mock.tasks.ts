@@ -6,7 +6,7 @@ import { ITodoService } from './ITodoService';
 export class MockTasks implements ITodoService {
     
 
-    public displayName:string;
+    public displayName:string="Dummy";
 
     private _mockData:ITodo[];
 
@@ -29,7 +29,12 @@ export class MockTasks implements ITodoService {
     }
 
     public async create(todo: ITodo):Promise<ITodo>{
+        let that = this;
+        if (todo!= undefined){
+            todo.id= _.maxBy(this._mockData, (o)=>{return o.id}).id +1;
+        }
         return new Promise<ITodo>((resolve) => {
+            that._mockData.push(todo);
             return resolve(todo);
         });
     }

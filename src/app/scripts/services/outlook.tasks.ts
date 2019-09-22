@@ -17,7 +17,7 @@ import { ITodoService } from './ITodoService';
 
 
 export class OutlookService implements ITodoService {
-    public displayName:string;
+    public displayName:string= "Outlook";
     
     private _token: IToken;
     private _baseUrl: string = 'https://outlook.office.com/api/v2.0';
