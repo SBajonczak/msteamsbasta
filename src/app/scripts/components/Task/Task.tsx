@@ -35,11 +35,9 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
         <div>
           <Tr>
             <Td>
-            {/* Clock */}
             {
               !this.props.task.completed
               ? <IconButton key="1"
-              
               styles={{
               root: {
                 selectors: {
@@ -53,7 +51,7 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
               : <IconButton key="1"  iconProps={{iconName:"Completed"}} />
             }
 
-            <span>{this.state.todo.title} </span>
+            <span>{this.state.todo.title}{this.props.task.importance=="high" ?<IconButton key="1"  iconProps={{iconName:"Important"}} /> :null}  </span>
             </Td>
           </Tr>
         </div>

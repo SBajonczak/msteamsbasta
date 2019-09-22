@@ -21,7 +21,6 @@ import { ITodo } from "../core";
 import * as _ from "lodash";
 import { MockTasks } from "../services/mock.tasks";
 import TaskManager from "../components/TaskManager/TaskManager";
-// import { GraphHttpClient, HttpClientResponse, IGraphHttpClientOptions } from '@microsoft/sp-http';
 
 /**
  * State for the bastaSuperTodoTabTab React component

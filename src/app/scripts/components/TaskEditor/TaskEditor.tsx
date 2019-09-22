@@ -50,7 +50,8 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
     }
 
     private updateImportance(event:any, newValue:boolean){
-        this._todo.importance = newValue ? "Hoch" : "";
+        console.log(newValue);
+        this._todo.importance = newValue ? "high" : "";
     }
 
     private updateCompletion(event:any, newValue:boolean){
@@ -66,16 +67,12 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
 
     private updateSelectedGateway(event:any, option?: IDropdownOption){
         this._gatewaySelected = true;
-        console.log("Selected Option:");
-        console.log(option);
         this._todo.provider = (this.props.gateways as ITodoService[]).filter((g:ITodoService) =>{ if(g.displayName === (option as IDropdownOption).key){return g;} })[0];
         
     }
 
     private async onOkClick(event:any){
-        // wenn kein Gateway aka ITodoService ausgewählt wurde, kann man jetzt diese Button gar nicht bekommen
         if(this.props.mode === FormMode.New){
-            console.log("Selected Provider:");
             console.log(this._todo.provider);
             let newTask = await (this._todo.provider as ITodoService).create(this._todo);
             this.props.hideNewForm();
@@ -112,10 +109,8 @@ export default class TaskEditor extends React.Component<ITaskEditorProps, ITaskE
                 <div><Toggle label="Wichtig" onChange={this.updateImportance.bind(this)}/></div>
                 <div>
                 {
-                    this._gatewaySelected
-                    ? this.renderOkButton()
-                    :null
-                                            }
+                    this.renderOkButton()
+                }
                     {this.renderCancelButton()}
                 </div>
             </div>;
