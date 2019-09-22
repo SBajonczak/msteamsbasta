@@ -124,60 +124,7 @@ export class BastaSuperTodoTab extends TeamsBaseComponent<
     return (
       <TeamsThemeContext.Provider value={context}>
         <Surface>
-          <Panel>
-            <PanelHeader>
-              <div>Super Todo</div>
-            </PanelHeader>
-            <PanelBody>
-              
-              {/* <div>{this.state.entityId}</div>
-              <PrimaryButton onClick={this.createEmptyOne}>
-                Neuer Eintrag
-              </PrimaryButton>
-              <div>
-                {this.state.todos.map(todo => {
-                  return (
-                    <div>
-                      <div>
-                        <span hidden={todo.isEditMode} key={todo.id}>
-                          Titel: {todo.title}
-                        </span>
-
-                        <Input
-                          hidden={!todo.isEditMode}
-                          key={todo.id}
-                          autoFocus
-                          label="Enter a Title"
-                          errorLabel={
-                            !todo.title ? "This value is required" : undefined
-                          }
-                          required
-                          value={todo.title}
-                        />
-                      </div>
-                      <div>
-                        <PrimaryButton
-                          hidden={todo.isEditMode}
-                          onClick={this.ToggleEdit.bind(this, todo)}
-                        >
-                          Bearbeiten
-                        </PrimaryButton>
-
-                        <PrimaryButton
-                          hidden={!todo.isEditMode}
-                          onClick={this.persisElement.bind(this, todo)}
-                        >
-                          Speichern
-                        </PrimaryButton>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div> */}
               <TaskManager TaskGateway={this.taskFabric} />
-            </PanelBody>
-            <PanelFooter />
-          </Panel>
         </Surface>
       </TeamsThemeContext.Provider>
     );

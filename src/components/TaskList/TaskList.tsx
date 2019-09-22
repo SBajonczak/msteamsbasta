@@ -4,6 +4,8 @@ import { ITaskListProps } from './ITaskListProps';
 import { ITaskListState } from './ITaskListState';
 
 
+import  { getContext, PrimaryButton, TeamsThemeContext, ThemeStyle, Table, Td, Tr , Th,TBody} from 'msteams-ui-components-react';
+
 
 import Task from "../Task/Task";
 import { ITodo } from '../../core';
@@ -27,16 +29,20 @@ this.props.onMarkComplete(task);
 
 public render(): React.ReactElement<ITaskListProps> {
   
-return (
-  
-  <div className="ms-Grid" dir="ltr">
-      {
-          this.props.tasks.map((task:ITodo) =>{
-              return <Task task={task} onMarkComplete={this.onMarkComplete.bind(this)} />
-          })
-      }
-  </div>
-  
-);
+  return (
+    <div className="ms-Grid" dir="ltr">
+        <Table>
+          <TBody>
+             <Tr><Th><h1>Aufgaben</h1></Th><Th>
+             </Th></Tr>
+            {
+              this.props.tasks.map((task:ITodo) =>{
+                  return <Task task={task} onMarkComplete={this.onMarkComplete.bind(this)} />
+              })
+          }
+          </TBody>
+      </Table>
+    </div>   
+  );
 }
 }

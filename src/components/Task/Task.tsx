@@ -7,11 +7,10 @@ import { initializeIcons } from '@uifabric/icons';
 import { ITaskProps } from './ITaskProps';
 import { ITaskState } from './ITaskListState';
 
+import  { getContext, PrimaryButton, TeamsThemeContext, ThemeStyle, Table, Td, Tr , Th,TBody} from 'msteams-ui-components-react';
 
 
 export default class Task extends React.Component<ITaskProps, ITaskState> {
-
-
   constructor(p,s){
     super(p,s);
     initializeIcons();
@@ -27,23 +26,25 @@ export default class Task extends React.Component<ITaskProps, ITaskState> {
   private onCompleteTaskClick(event:any){
     console.debug("INIT markAsComplete in Task", this.props.task);
     this.props.onMarkComplete(this.props.task);
-  }
+}
 
 
   public render(): React.ReactElement<ITaskProps> {
 
     return (
-        <div >
-          <div >
-              <Checkbox key="1" label={this.state.todo.title} disabled={this.state.todo.completed} checked={this.state.todo.completed} />
-          </div>
-          <div >
+        <div>
+          <Tr>
+            <Td>
+            {/* Clock */}
             {
               !this.props.task.completed
-              ? <IconButton key="1"  iconProps={{iconName:"Completed"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
-              : null
+              ? <IconButton key="1"  iconProps={{iconName:"LocationCircle"}} disabled={this.state.todo.completed} onClick={this.onCompleteTaskClick.bind(this)} />
+              : <IconButton key="1"  iconProps={{iconName:"Completed"}} />
             }
-          </div>
+
+            <span>{this.state.todo.title} </span>
+            </Td>
+          </Tr>
         </div>
     );
   }

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import styles from './TaskManager.module.scss';
+
+
+import  { getContext, PrimaryButton, TeamsThemeContext, ThemeStyle, Table, Td, Tr , Th,TBody, Panel, PanelBody, PanelHeader} from 'msteams-ui-components-react';
 
 
 import TaskManagerToolbar from "../TaskManagerToolbar/TaskManagerToolbar";
@@ -14,8 +16,6 @@ import { ITodo } from '../../core';
 
 
 export default class TaskManager extends React.Component<ITaskManagerProps, ITaskManagerState> {
-
-
   constructor(p, s) {
     super(p, s);
 
@@ -68,11 +68,21 @@ export default class TaskManager extends React.Component<ITaskManagerProps, ITas
   public render(): React.ReactElement<ITaskManagerProps> {
     return (
       <div>
-        <TaskManagerToolbar showNewForm={this.showNewForm.bind(this)} allowNewButton={this.state.showNewForm} />
-        {this.state.showNewForm
+            <Panel>
+              <PanelHeader>
+              <TaskManagerToolbar showNewForm={this.showNewForm.bind(this)} allowNewButton={this.state.showNewForm} />
+              </PanelHeader>
+
+              <PanelBody>
+                      {this.state.showNewForm
           ? <TaskEditor mode={FormMode.New} gateways={[this.props.TaskGateway.mockService]} hideNewForm={this.hideNewForm.bind(this)} />
           : null
         }
+
+              </PanelBody>
+
+            </Panel>
+      
         {!this.state.showNewForm
           ? <TaskList tasks={this.state.tasks} onMarkComplete={this.markAsComplete.bind(this)} />
           : null

@@ -4,6 +4,9 @@ import { ITaskManagerToolbarProps } from './ITaskManagerToolbarProps';
 import { ITaskManagerToolbarState } from './ITaskManagerToolbarState';
 import { CommandBar, ICommandBarItemProps } from 'office-ui-fabric-react/lib/CommandBar';
 
+import { PrimaryButton } from "msteams-ui-components-react";
+
+
 export default class TaskManagerToolbar extends React.Component<ITaskManagerToolbarProps, ITaskManagerToolbarState> {
   
   constructor(p,s){
@@ -15,26 +18,10 @@ export default class TaskManagerToolbar extends React.Component<ITaskManagerTool
   }
 
 
-
-
-  private getItems():ICommandBarItemProps[]{
-    return [
-      {
-        disabled: this.props.allowNewButton,
-        key: 'newItem',
-        name: 'Neu',
-        iconProps: {
-          iconName: 'Add'
-        },
-        onClick: () =>{this.props.showNewForm()},
-        ariaLabel: 'New'}
-      ]
-      }
-
   public render(): React.ReactElement<ITaskManagerToolbarProps> {
     return (
       <div>
-          <CommandBar items={this.getItems()} />
+        <PrimaryButton hidden={this.props.allowNewButton}  onClick={() => this.props.showNewForm()}>Neue Aufgabe</PrimaryButton>
       </div>
     );
   }
