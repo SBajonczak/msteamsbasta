@@ -55,7 +55,7 @@
     "gulp-zip": "4.2.0",
     "hellojs": "^2.0.0-4",
     "jest": "^24.5.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "morgan": "1.9.1",
     "msteams-react-base-component": "1.1.1",
     "msteams-ui-components-react": "^0.8.4",
